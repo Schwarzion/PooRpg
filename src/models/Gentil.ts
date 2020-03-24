@@ -1,9 +1,9 @@
 import { Personnage } from "./Personnage";
-
+import { Arme } from "./Arme";
 
 export class Gentil extends Personnage {
 
-    constructor(nom: string, arme: number) {
-        super(nom, 15, 20, 0, 1);
+    constructor(nom: string, arme: Arme) {
+        super(nom, 30, 30, 0, arme);
     }
 }

@@ -1,10 +1,10 @@
 import { Personnage } from "./Personnage";
-
+import { Arme } from "./Arme";
 export class Mechant extends Personnage {
 
-    constructor()
+    constructor(arme: Arme)
     {
-        let nom = "La miche";
-        super(nom, 20, 30, 0, 3);
+        let nom = "Coronavirus";
+        super(nom, 40, 40, 0, arme);
     }
 }

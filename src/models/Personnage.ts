@@ -1,6 +1,4 @@
-import { Arme } from "./Arme";
-import { Hache } from "./Hache";
-import { Epee } from "./Epee";
+import { Arme, Hache, Epee } from "./Arme";
 
 export class Personnage {
 
@@ -10,12 +8,12 @@ export class Personnage {
     private _defense: number;
     private _arme: Arme;
 
-    constructor(nom: any, pv: number, pvMax: number, defense = 0, armeNb: number) {
+    constructor(nom: any, pv: number, pvMax: number, defense = 0, arme: Arme) {
         this._nom = nom;
         this._pv = pv;
         this._pvMax = pvMax;
         this._defense = defense;
-        this._arme = this.setArme(armeNb);
+        this._arme = arme;
     }
 
     public attack = (cible: Personnage) => {
@@ -30,8 +28,7 @@ export class Personnage {
     }
 
     public isKilled = () => {
-        if (this._pv <= 0)
-        {
+        if (this._pv <= 0) {
             console.log(`${this._nom} a été tué`);
             return true;
         }
@@ -42,28 +39,31 @@ export class Personnage {
     //Getters
 
     /**
-     * Get Name
-     * 
-     * @return string
-     */
+    * Get Name
+    * 
+    * @return string
+    */
     public getNom = () => {
         return this._nom;
     }
 
     /**
-     * Get actual health point
-     * 
-     * @return number
-     */
+    * Get actual health point
+    * 
+    * @return number
+    */
     public getPv = () => {
-        return this._pv;
+        if (this._pv < 0)
+            return 0;
+        else
+            return this._pv;
     }
 
     /**
-       * Get max health point
-       * 
-       * @return number
-       */
+    * Get max health point
+    * 
+    * @return number
+    */
     public getPvMax = () => {
         return this._pvMax;
     }
@@ -77,13 +77,21 @@ export class Personnage {
         return this._defense;
     }
 
+    /**
+    *  get arme
+    * 
+    * @return Arme
+    */
+    public getArme = () => {
+        return this._arme;
+    }
 
     //Setters
 
     /**
      * set name
      * 
-     * @return string
+     * @return void
      */
     public setNom = (nom: string) => {
         this._nom = nom;
@@ -92,7 +100,7 @@ export class Personnage {
     /**
      * set actual health point
      * 
-     * @return number
+     * @return void
      */
     public setPv = (pv: number) => {
         this._pvMax = pv;
@@ -101,7 +109,7 @@ export class Personnage {
     /**
     * set max health point
     * 
-    * @return number
+    * @return void
     */
     public setPvMax = (pvMax: number) => {
         this._pvMax = pvMax;
@@ -110,7 +118,7 @@ export class Personnage {
     /**
     * set defense point
     * 
-    * @return number
+    * @return void
     */
     public setDefense = (defense: number) => {
         this._defense = defense;
@@ -119,18 +127,9 @@ export class Personnage {
     /**
     *  Set arme
     * 
-    * @return Arme
+    * @return void
     */
-    public setArme = (nb: number) => {
-        if (nb === 1) {
-            return new Hache();
-        }
-        else if (nb === 2) {
-            return new Epee();
-        }
-        else
-            return new Arme(3, 6, 5);
+    public setArme = (arme: Arme) => {
+        this._arme = arme;
     }
-
-
 }

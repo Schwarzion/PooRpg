@@ -1,5 +1,6 @@
 import { Gentil } from "./models/Gentil";
 import { Mechant } from "./models/Mechant";
+import { Arme, Hache, Epee } from "./models/Arme";
 
 const readline = require('readline');
 const chalk = require('chalk');
@@ -11,9 +12,10 @@ const chalk = require('chalk');
 console.log('-------------------------------------------------');
 // let players = [];
 // let ennemies = [];
-let player: Gentil = new Gentil("Michel", 1);
+let armeNb: number = 1;
+let player: Gentil = new Gentil("Michel", getArme(armeNb));
 //players.push(player)
-let ennemy: Mechant = new Mechant();
+let ennemy: Mechant = new Mechant(getArme(3));
 //ennemies.push(ennemy);
 
 let partie: boolean = true;
@@ -24,4 +26,15 @@ while (partie) {
     ennemy.attack(player);
     if (player.isKilled())
         break;
+}
+
+function getArme(nb: number) {
+    if (nb === 1) {
+        return new Hache();
+    }
+    else if (nb === 2) {
+        return new Epee();
+    }
+    else
+        return new Arme(3, 6, 5);
 }
