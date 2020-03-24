@@ -18,7 +18,6 @@ export class Personnage {
         this._arme = this.setArme(armeNb);
     }
 
-
     public attack = (cible: Personnage) => {
         console.log(`Vous attaquez ${cible.getNom()} avec ${this._arme.constructor.name}\nMontant des dégats : ${this._arme.getDmg()}`);
         cible.getAttacked(cible, this._arme.getDmg());
@@ -31,10 +30,7 @@ export class Personnage {
 
     public isKilled = () => {
         if (this._pv <= 0)
-        {
             return true;
-        }
-            
         else
             return false;
     }

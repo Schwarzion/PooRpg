@@ -20,7 +20,6 @@ ennemies.push(ennemy);
 while (!(player.isKilled() || ennemy.isKilled())) {
     player.attack(ennemy);
     ennemy.attack(player);
-    player.attack(ennemy);
 }
 
 

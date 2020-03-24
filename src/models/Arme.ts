@@ -17,10 +17,10 @@ export class Arme {
     public getDmg = () => {
         //Random number generation between minDmg and maxDmg
         if (this.isCriticalHit()) {
-            return (this._maxDmg);
+            return (this._maxDmg + 1);
         }
         else
-            return (this._minDmg);
+            return (Math.floor(Math.random() * (this._maxDmg-this._minDmg)) + this._minDmg);
     }
 
     private isCriticalHit = () => {
@@ -28,7 +28,10 @@ export class Arme {
         let nb: number = 15;
         //If number generated is lower or equal to criticChance, return true
         if (nb <= this._criticChance)
+        {   
+            console.log('Critical Hit!');
             return true;
+        }
         //If not, return false
         else
             return false
