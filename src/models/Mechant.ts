@@ -5,6 +5,6 @@ export class Mechant extends Personnage {
     constructor()
     {
         let nom = "La miche";
-        super(nom, 70, 70, 0, 3);
+        super(nom, 20, 30, 0, 3);
     }
 }

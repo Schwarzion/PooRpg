@@ -10,7 +10,7 @@ export class Personnage {
     private _defense: number;
     private _arme: Arme;
 
-    constructor(nom: any, pv = 50, pvMax = 50, defense = 0, armeNb: number) {
+    constructor(nom: any, pv: number, pvMax: number, defense = 0, armeNb: number) {
         this._nom = nom;
         this._pv = pv;
         this._pvMax = pvMax;
@@ -19,8 +19,9 @@ export class Personnage {
     }
 
     public attack = (cible: Personnage) => {
-        console.log(`Vous attaquez ${cible.getNom()} avec ${this._arme.constructor.name}\nMontant des dégats : ${this._arme.getDmg()}`);
-        cible.getAttacked(cible, this._arme.getDmg());
+        let dmg = this._arme.getDmg();
+        console.log(`Vous attaquez ${cible.getNom()} avec ${this._arme.constructor.name}\nMontant des dégats : ${dmg}`);
+        cible.getAttacked(cible, dmg);
     }
 
     public getAttacked = (cible: Personnage, dmg: number) => {
@@ -30,7 +31,10 @@ export class Personnage {
 
     public isKilled = () => {
         if (this._pv <= 0)
+        {
+            console.log(`${this._nom} a été tué`);
             return true;
+        }
         else
             return false;
     }
