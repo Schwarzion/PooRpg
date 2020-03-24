@@ -13,7 +13,7 @@ console.log('-------------------------------------------------');
 // let players = [];
 // let ennemies = [];
 let armeNb: number = 1;
-let player: Gentil = new Gentil("Michel", getArme(armeNb));
+let player: Gentil = new Gentil("Julien", getArme(armeNb));
 //players.push(player)
 let ennemy: Mechant = new Mechant(getArme(3));
 //ennemies.push(ennemy);

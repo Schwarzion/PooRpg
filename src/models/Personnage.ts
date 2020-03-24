@@ -18,7 +18,12 @@ export class Personnage {
 
     public attack = (cible: Personnage) => {
         let dmg = this._arme.getDmg();
-        console.log(`Vous attaquez ${cible.getNom()} avec ${this._arme.constructor.name}\nMontant des dégats : ${dmg}`);
+        if (this._arme.constructor === Arme) {
+            console.log(`${this._nom} attaque ${cible.getNom()}\nMontant des dégats : ${dmg}`);
+        }
+        else
+            console.log(`${this._nom} attaque ${cible.getNom()} avec ${this._arme.constructor.name}\nMontant des dégats : ${dmg}`);
+
         cible.getAttacked(cible, dmg);
     }
 
