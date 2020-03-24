@@ -1,50 +1,26 @@
-class Voiture {
-    //Variables d'instance
-    private _marque : string;
-    private _couleur: string;
+import { Gentil } from "./models/Gentil";
+import { Mechant } from "./models/Mechant";
 
-    //Variables de classe
-    private static _nbVoiture: number;
+const readline = require('readline');
+const chalk = require('chalk');
 
-    contrustor(marque="", couleur="")
-    {
-        this._marque = marque;
-        this._couleur = couleur;
-        Voiture._nbVoiture += 1; 
-    }
+// let q1: string = 'Ajouter un personnage [y/n]?';
 
-    //Getters
-    get marque()
-    {
-        return this._marque;
-    }
+// let q2: string = 'Quel nom lui donner?';
 
-    set marque(marque: string)
-    {
-        this._marque = marque;
-    }
+// let q3: string = 'Quel arme lui attribuer [1/2]?';
 
-    get couleur()
-    {
-        return this._couleur;
-    }
-
-    set couleur(couleur: string)
-    {
-        this._couleur = couleur;
-    }
-
-    //Méthodes d'intance
-    rouler = (vitesse: number) => {
-        console.log(`Je roule à ${vitesse} km/h`);
-    }
+console.clear();
+let players = [];
+let ennemies = []
+let player: Gentil = new Gentil("Michel", 1);
+players.push(player)
+let ennemy: Mechant = new Mechant();
+ennemies.push(ennemy);
+while (!(player.isKilled() || ennemy.isKilled())) {
+    player.attack(ennemy);
+    ennemy.attack(player);
+    player.attack(ennemy);
 }
 
-class VoitureDeSport extends Voiture {
-    private _superVitesse: number;
 
-    constructor(marque = "", couleur= "", superVitesse = 400) {
-        super(marque, couleur);
-        this._superVitesse = superVitesse;
-    }
-}
