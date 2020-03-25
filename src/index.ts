@@ -5,8 +5,8 @@ let partie = new PartieService();
 
 partie.addPlayers().then(partie.startGame);
 
-while (partie.getGentilsLengh() > 0 && partie.getMechantsLengh() > 0) {
-    console.log('toto');
-}
+// while (partie.getGentilsLengh() > 0 && partie.getMechantsLengh() > 0) {
+
+// }
 
 

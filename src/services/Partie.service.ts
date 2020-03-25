@@ -31,11 +31,11 @@ export class PartieService {
 
     public startGame = () => {
         if (this._equipeGentils.length > 0) {
-            console.log(`Equipe des Gentils :`);
+            console.log(`\nEquipe des Gentils :`);
             for (let gentil of this._equipeGentils) {
                 console.log(gentil.getNom());
             }
-            console.log(`Equipe des Méchants :`);
+            console.log(`\nEquipe des Méchants :`);
             for (let mechant of this._equipeMechants) {
                 console.log(mechant.getNom());
             }
@@ -56,13 +56,16 @@ export class PartieService {
         else this.selectArme();
     }
 
+    public getName = async () => {
+        let name = await this.readLine('Quel nom lui donner? ');
+        return name;
+    }
+
     public addPlayers = async () => {
-        let q1: string = 'Ajouter un personnage [y/n]? ';
-        let q2: string = 'Quel nom lui donner? ';
-        while (await this.readLine(q1) === 'y') {
-            let name: string = this.readLine(q2).toString();
+        while (await this.readLine('Ajouter un personnage [y/n]? ') != 'n') {
+            let name: any = await this.getName();
             let arme: any = await this.selectArme();
-            let player: Gentil = new Gentil(name, arme);
+            let player: Gentil = new Gentil(name.toString(), arme);
             this.addToEquipeGentils(player);
         }
     }

@@ -10,7 +10,7 @@ export class Arme {
     }
 
     /**
-    * Get Damage by egenrating random number between interval
+    * Get damage by generating random number between interval
     * 
     * @return number
     */
@@ -20,9 +20,14 @@ export class Arme {
             return (this._maxDmg + 1);
         }
         else
-            return (Math.floor(Math.random() * (this._maxDmg - (this._minDmg - 1))) + this._minDmg);
+            return (Math.floor(Math.random() * (this._maxDmg - (this._minDmg))) + this._minDmg);
     }
 
+    /**
+    * Ask if attack will critical hit
+    * 
+    * @return boolean
+    */
     private isCriticalHit = () => {
         //Random number generation between 0 and 100 
         let nb: number = Math.floor(Math.random() * 100) - 1;

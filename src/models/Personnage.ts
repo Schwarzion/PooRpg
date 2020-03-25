@@ -7,6 +7,7 @@ export class Personnage {
     private _pvMax: number;
     private _defense: number;
     private _arme: Arme;
+    private _cible: Personnage;
 
     constructor(nom: any, pv: number, pvMax: number, defense = 0, arme: Arme) {
         this._nom = nom;
@@ -14,10 +15,12 @@ export class Personnage {
         this._pvMax = pvMax;
         this._defense = defense;
         this._arme = arme;
+        this._cible = this;
     }
 
     public attack = (cible: Personnage) => {
         let dmg = this._arme.getDmg();
+        this._cible = cible;
         if (this._arme.constructor === Arme) {
             console.log(`${this._nom} attaque ${cible.getNom()}\nMontant des dégats : ${dmg}`);
         }
