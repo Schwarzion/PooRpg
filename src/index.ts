@@ -1,40 +1,12 @@
-import { Gentil } from "./models/Gentil";
-import { Mechant } from "./models/Mechant";
-import { Arme, Hache, Epee } from "./models/Arme";
+import { PartieService } from './services/Partie.service'
+import { TourService } from './services/Tour.service';
 
-const readline = require('readline');
-const chalk = require('chalk');
+let partie = new PartieService();
 
-// let q1: string = 'Ajouter un personnage [y/n]?';
-// let q2: string = 'Quel nom lui donner?';
-// let q3: string = 'Quel arme lui attribuer [1/2]?';
+partie.addPlayers().then(partie.startGame);
 
-console.log('-------------------------------------------------');
-// let players = [];
-// let ennemies = [];
-let armeNb: number = 1;
-let player: Gentil = new Gentil("Julien", getArme(armeNb));
-//players.push(player)
-let ennemy: Mechant = new Mechant(getArme(3));
-//ennemies.push(ennemy);
-
-let partie: boolean = true;
-while (partie) {
-    player.attack(ennemy);
-    if (ennemy.isKilled())
-        break;
-    ennemy.attack(player);
-    if (player.isKilled())
-        break;
+while (partie.getGentilsLengh() > 0 && partie.getMechantsLengh() > 0) {
+    console.log('toto');
 }
 
-function getArme(nb: number) {
-    if (nb === 1) {
-        return new Hache();
-    }
-    else if (nb === 2) {
-        return new Epee();
-    }
-    else
-        return new Arme(3, 6, 5);
-}
+

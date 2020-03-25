@@ -1,5 +1,5 @@
 import { Arme, Hache, Epee } from "./Arme";
-
+import { generateName } from '../lib/nameGenerator'
 export class Personnage {
 
     private _nom: string;
@@ -136,5 +136,22 @@ export class Personnage {
     */
     public setArme = (arme: Arme) => {
         this._arme = arme;
+    }
+}
+
+
+export class Gentil extends Personnage {
+
+    constructor(nom: string, arme: Arme) {
+        super(nom, 30, 30, 0, arme);
+    }
+}
+
+export class Mechant extends Personnage {
+
+    constructor(arme: Arme)
+    {
+        let nom = generateName();
+        super(nom, 40, 40, 0, arme);
     }
 }
