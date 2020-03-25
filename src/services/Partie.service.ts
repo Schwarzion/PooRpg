@@ -13,11 +13,16 @@ export class PartieService {
     }
 
     private readLine = async (question: string) => {
+        // réponse de la question
         let response;
+
+        // création de l'outil pour gérer les entrées et sorties consoles
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
         })
+
+        // je génère la question en asynchrone que je await
         await new Promise((resolve, reject) => {
             rl.question(question, (answer: string) => {
                 resolve(answer)
@@ -26,8 +31,10 @@ export class PartieService {
             response = onfull;
             rl.close()
         })
+
         return response
     }
+
 
     public startGame = () => {
         if (this._equipeGentils.length > 0) {
@@ -46,7 +53,7 @@ export class PartieService {
     }
 
     public selectArme = async () => {
-        let nb = await this.readLine('Quel arme lui attribuer [1 => Hache /2 => Epee]? ');
+        let nb = Number(await this.readLine('Quel arme lui attribuer [1 => Hache /2 => Epee]? '));
         if (nb === 1) {
             return new Hache();
         }
@@ -56,18 +63,30 @@ export class PartieService {
         else this.selectArme();
     }
 
-    public getName = async () => {
-        let name = await this.readLine('Quel nom lui donner? ');
+    public getName = async (question: string) => {
+        let name = await this.readLine(question);
         return name;
+        //Verif nom en double
+        //If name already exist
+        //this.getName('Nom déjà utilisé');
+        //else
+
     }
 
     public addPlayers = async () => {
-        while (await this.readLine('Ajouter un personnage [y/n]? ') != 'n') {
-            let name: any = await this.getName();
-            let arme: any = await this.selectArme();
+        let test: any = await this.readLine('Ajouter un personnage [y/n]? ');
+        if (test === 'n') {
+            this.startGame();
+        }
+        if (test != 'n' && test === 'y') {
+            let name: any = await this.getName('Quel nom lui donner? ');
+            let arme: Arme = await this.selectArme() as Arme;
             let player: Gentil = new Gentil(name.toString(), arme);
             this.addToEquipeGentils(player);
+            this.addPlayers();
         }
+        else if (test != 'n' && test != 'y')
+            this.addPlayers();
     }
 
     private addToEquipeGentils = (player: Personnage) => {
@@ -85,5 +104,13 @@ export class PartieService {
 
     private initTour = () => {
         let tour = new TourService(this);
+    }
+
+    public getGentilsTab = () => {
+        return this._equipeGentils;
+    }
+
+    public getMechantsTab = () => {
+        return this._equipeMechants;
     }
 }
